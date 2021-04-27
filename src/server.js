@@ -1,6 +1,5 @@
 import express from 'express'
 import mongoose from 'mongoose'
-// import cron from 'node-cron'
 
 import cors from 'cors'
 import cronFii from './app/jobs/fiis'

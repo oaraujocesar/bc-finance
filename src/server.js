@@ -19,7 +19,6 @@ server.use(cors())
 server.use(express.json())
 server.use(routes)
 
-// cron.schedule('* * * * *', () => console.log('teste'))
 cronFii();
 
 server.listen(port, () => console.log(`Running on port ${port}`))

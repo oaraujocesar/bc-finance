@@ -4,6 +4,6 @@ import FiisController from './app/controllers/FiisController'
 
 const routes = express.Router()
 
-routes.get('api/v1/fiis', FiisController.index)
+routes.get('/api/v1/fiis', FiisController.index)
 
 export default routes

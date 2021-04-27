@@ -1,3 +1,4 @@
+import Fii from '../models/Fii'
 import puppeteer from 'puppeteer'
 
 class FiisController {
@@ -14,7 +15,7 @@ class FiisController {
           ),
         ]
 
-        return rows.slice(1).map((row) => {
+        return rows.slice(1).map( (row) => {
           return {
             ticker: row.cells[0].innerText,
             last_earnings: row.cells[1].innerText,
@@ -30,6 +31,18 @@ class FiisController {
       })
 
       await browser.close()
+
+      content.forEach(async (fii) => {
+
+        const isFiiRegistered = await Fii.find({ ticker: fii.ticker })
+
+        if(!isFiiRegistered.length) {
+         return await Fii.create(fii)
+        } 
+
+        await Fii.findOneAndUpdate({ ticker: fii.ticker }, fii, { new: true })
+      }
+      )
 
       return response.status(200).json(content)
     } catch (error) {

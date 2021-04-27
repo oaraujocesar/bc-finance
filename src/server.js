@@ -1,6 +1,9 @@
 import express from 'express'
 import mongoose from 'mongoose'
+// import cron from 'node-cron'
+
 import cors from 'cors'
+import cronFii from './app/jobs/fiis'
 
 require('dotenv').config()
 import routes from './routes'
@@ -15,5 +18,8 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD
 server.use(cors())
 server.use(express.json())
 server.use(routes)
+
+// cron.schedule('* * * * *', () => console.log('teste'))
+cronFii();
 
 server.listen(port, () => console.log(`Running on port ${port}`))
